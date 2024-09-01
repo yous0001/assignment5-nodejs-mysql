@@ -1,5 +1,5 @@
 {
-  "name": "assignment-5-nodejs-(sequalize)",
+  "name": "assignment-5",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2",
+    "mysql2": "^3.11.0",
     "sequelize": "^6.37.3"
   }
 }

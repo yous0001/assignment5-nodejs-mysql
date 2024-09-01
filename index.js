@@ -6,7 +6,7 @@ const app=express()
 const port=3000
 
 app.use(express.json())
-db_connection
+db_connection()
 app.use('/user',userRouter)
 
 app.listen(port,()=>{

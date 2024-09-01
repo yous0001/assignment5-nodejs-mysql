@@ -32,3 +32,25 @@ export const signUp=async(req,res,next)=>{
         status:400
     })
 }
+
+export const signin=async(req,res,next)=>{
+    const {email,password}=req.body
+    const user=await User.findOne({
+        where:{email,password}
+    })
+    
+    if(user){
+        user.isLoggedIn=true
+        await user.save()
+        return res.json({
+            message:"sign in success",
+            status:200
+        })
+    }
+
+    return res.json({
+        message:"sign in fail",
+        status:400
+    })
+
+}

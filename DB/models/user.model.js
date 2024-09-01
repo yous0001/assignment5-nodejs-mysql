@@ -17,6 +17,10 @@ const User=sequelize_config.define('User',{
     age:{
         type:DataTypes.INTEGER,
         allowNull:false
+    },
+    isLoggedIn:{
+        type:DataTypes.BOOLEAN,
+        defaultValue:false
     }
 
 

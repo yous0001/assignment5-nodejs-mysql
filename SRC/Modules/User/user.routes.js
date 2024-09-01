@@ -2,6 +2,7 @@ import { Router } from "express";
 import * as userController from "./user.controller.js"
 
 const router =Router()
-router .get('/',userController.getUsers)
+router.get('/',userController.getUsers)
+router.post('/signup',userController.signUp)
 
 export default router

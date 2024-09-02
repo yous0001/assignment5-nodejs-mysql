@@ -54,3 +54,27 @@ export const signin=async(req,res,next)=>{
     })
 
 }
+
+export const updateUser=async(req,res,next)=>{
+    const {email,name,age}=req.body
+    const user=await User.findByPk(email)
+    
+    if(!user){
+        return res.json({
+            message:"email not found",
+            status:404
+        })
+    }
+
+    if(name)
+        user.name=name
+    if(age)
+        user.age=age
+    
+    await user.save()
+
+    return res.json({
+        message:"user update success",
+        status:200
+    })
+}

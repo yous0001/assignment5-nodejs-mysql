@@ -1,3 +1,4 @@
+import { Op } from "sequelize"
 import User from "../../../DB/models/user.model.js"
 
 export const getUsers=async(req,res,next)=>{
@@ -90,10 +91,37 @@ export const deleteUser=async(req,res,next)=>{
         })
     }
     await user.destroy();
-    
+
     return res.json({
         message:"user deleted success",
         status:200
     })
 
+}
+
+export const searchForUser=async(req,res,next)=>{
+    const {firstletter,maxage}=req.body
+    const users=await User.findAll({
+        where:{
+            name: {
+                [Op.like]: `${firstletter}%`
+            },
+            age:{
+                [Op.lt]: maxage
+            }
+        }
+    })
+
+    if(!users){
+        return res.json({
+            message:"no user found with this restrictions",
+            status:404
+        })
+    }
+
+    return res.json({
+        message:"Done",
+        status:200,
+        users
+    })
 }

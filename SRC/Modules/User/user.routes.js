@@ -7,5 +7,6 @@ router.post('/signup',userController.signUp)
 router.post('/signin',userController.signin)
 router.put('/updateUser',userController.updateUser)
 router.delete('/deleteUser',userController.deleteUser)
+router.get('/searchforuser',userController.searchForUser)
 
 export default router

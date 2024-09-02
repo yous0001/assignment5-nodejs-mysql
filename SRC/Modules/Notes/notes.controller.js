@@ -26,3 +26,26 @@ export const addNote=async(req,res,next)=>{
         status:400
     })
 }
+export const deleteNote=async(req,res,next)=>{
+    const {noteID,UserEmail}=req.query
+    const note=await Note.findOne({
+        where:{
+            id:noteID,
+            UserEmail
+        }
+    })
+    if(!note){
+        return res.json({
+            message:"note not found",
+            status:404
+        })
+    }
+
+    await note.destroy()
+
+    return res.json({
+        message:"note deleted success",
+        status:200
+    })
+
+}

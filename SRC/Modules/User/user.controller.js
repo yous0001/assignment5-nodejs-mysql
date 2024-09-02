@@ -100,14 +100,16 @@ export const deleteUser=async(req,res,next)=>{
 }
 
 export const searchForUser=async(req,res,next)=>{
-    const {firstletter,maxage}=req.body
+    const {firstletter="",maxage=200,minage=0}=req.body
+    //we put default value of first letter="" so that if user don't want to search for it serach will be by "%" so it will take any value 
+    //that will let us don't need to build other api for that  
     const users=await User.findAll({
         where:{
             name: {
                 [Op.like]: `${firstletter}%`
             },
             age:{
-                [Op.lt]: maxage
+                [Op.between]: [minage, maxage]
             }
         }
     })
@@ -119,6 +121,28 @@ export const searchForUser=async(req,res,next)=>{
         })
     }
 
+    return res.json({
+        message:"Done",
+        status:200,
+        users
+    })
+}
+
+export const getOldestUsers=async(req,res,next)=>{ 
+    let users=await User.findAll({
+        order:[
+            ["age","desc"]
+        ],
+        limit: 3
+    })
+    
+    if(!users){
+        return res.json({
+            message:"no user found with this restrictions",
+            status:404
+        })
+    }
+    
     return res.json({
         message:"Done",
         status:200,

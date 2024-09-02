@@ -9,5 +9,6 @@ router.put('/updateUser',userController.updateUser)
 router.delete('/deleteUser',userController.deleteUser)
 router.get('/searchforuser',userController.searchForUser)
 router.get('/getoldestusers',userController.getOldestUsers)
+router.get('/searchforusersbyages',userController.searchForUsersByAges)
 
 export default router

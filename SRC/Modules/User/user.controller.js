@@ -135,7 +135,7 @@ export const getOldestUsers=async(req,res,next)=>{
         ],
         limit: 3
     })
-    
+
     if(!users){
         return res.json({
             message:"no user found with this restrictions",
@@ -143,6 +143,31 @@ export const getOldestUsers=async(req,res,next)=>{
         })
     }
     
+    return res.json({
+        message:"Done",
+        status:200,
+        users
+    })
+}
+
+
+export const searchForUsersByAges=async(req,res,next)=>{
+    const {ages}=req.body
+    const users=await User.findAll({
+        where:{
+            age:{
+                [Op.in]: ages
+            }
+        }
+    })
+
+    if(!users){
+        return res.json({
+            message:"no user found with this restrictions",
+            status:404
+        })
+    }
+
     return res.json({
         message:"Done",
         status:200,

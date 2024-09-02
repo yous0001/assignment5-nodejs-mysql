@@ -78,3 +78,22 @@ export const updateUser=async(req,res,next)=>{
         status:200
     })
 }
+
+export const deleteUser=async(req,res,next)=>{
+    const {email}=req.query
+    const user=await User.findByPk(email)
+
+    if(!user){
+        return res.json({
+            message:"email not found",
+            status:404
+        })
+    }
+    await user.destroy();
+    
+    return res.json({
+        message:"user deleted success",
+        status:200
+    })
+
+}
